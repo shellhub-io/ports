@@ -5,22 +5,19 @@ Agent.
 
 ## Build
 
-To build and install ShellHub Agent from the FreeBSD Port, follow these steps:
-
-1. Clone the FreeBSD Ports Collection repository to your local system:
+Clone the FreeBSD Ports Collection repository to your local system:
 
 ```sh
 git clone https://github.com/shellhub-io/ports.git
 ```
 
-2. Change into the directory
-   containing the ShellHub Agent Port:
+Change into the directory containing the ShellHub Agent Port:
 
 ```sh
 cd ports
 ```
 
-3. Build and install ShellHub Agent using the `make` command:
+Build and install ShellHub Agent using the `make` command:
 
 ```sh
 make install clean
