@@ -1,0 +1,10 @@
+ShellHub is a centralized SSH gateway that allows users to remotely
+access and manage their servers and devices from anywhere, using a web
+browser or mobile app. It offers a secure and convenient way to
+connect and control your servers and devices.
+
+The ShellHub's Agent is a lightweight software component that runs the
+device and provide communication between this device and ShellHub's
+server. Its main role is to provide a reserve SSH server always
+connected to the ShellHub server, allowing SSH connections to be
+established to the device even when it is behind a firewall or NAT.
