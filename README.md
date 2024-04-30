@@ -1,7 +1,6 @@
-![shellHub's FreeBSD Port logo](./logo.png)
+![shellHub's FreeBSD Port logo](./shellhub/logo.png)
 
-This is the [FreeBSD Port](https://www.FreeBSD.org/ports) for ShellHub
-Agent.
+FreeBSD Port for ShellHub Agent.
 
 ## Build
 
@@ -11,13 +10,13 @@ Clone the FreeBSD Ports Collection repository to your local system:
 git clone https://github.com/shellhub-io/ports.git
 ```
 
-Change into the directory containing the ShellHub Agent Port:
+Change into the directory containing the ShellHub Port:
 
 ```sh
 cd ports
 ```
 
-Build and install ShellHub Agent using the `make` command:
+Build and install ShellHub using the `make` command:
 
 ```sh
 make install clean
