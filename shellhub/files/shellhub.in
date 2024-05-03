@@ -1,0 +1,67 @@
+#!/bin/sh
+
+# PROVIDE: shellhub
+# REQUIRE: DAEMON
+# BEFORE:  LOGIN
+# KEYWORD: nojail shutdown
+#
+# Add these lines to /etc/rc.conf.local or /etc/rc.conf
+# to enable this service:
+#
+# shellhub_enable (bool):	Set to NO by default.
+#                           Set it to YES to enable shellhub.
+# shellhub_server_address (url):	Set the ShellHub server instance address.
+#
+# shellhub_tenant_id (uuid):	Set a ShellHub's Tenant ID.
+#
+# shellhub_private_key (path):	Set ShellHub Agent's private key. 
+#                               By default, it is stored in `/etc/shellhub.key`.
+
+. /etc/rc.subr
+
+name="shellhub" 
+desc="The ShellHub's Agent is a lightweight software component that runs the device and provide communication between this device and ShellHub's server."
+rcvar="${name}_enable"
+
+pidfile="/var/run/${name}.pid"
+
+start_precmd="${name}_prestart"
+start_postcmd="${name}_poststart"
+
+command="/usr/local/bin/${name}"
+command_args="> /dev/null 2>&1 &"
+
+load_rc_config $name
+: ${shellhub_private_key="/usr/local/etc/${name}.key"}
+
+shellhub_prestart()
+{
+    if [ -z $shellhub_server_address ]; then
+        err 1 "shellhub_server_address must be defined in /etc/rc.conf"
+    fi
+
+    if [ -z $shellhub_tenant_id ]; then
+        err 1 "shellhub_tenant_id must be defined in /etc/rc.conf"
+    fi
+
+    export SERVER_ADDRESS=$shellhub_server_address
+    export TENANT_ID=$shellhub_tenant_id
+    export PRIVATE_KEY=$shellhub_private_key
+
+    return 0
+}
+
+shellhub_poststart()
+{
+    pid=$(check_process "$command")
+    if [ -z "$pid" ]; then
+        err 1 "Error: Process $command is not running."
+    fi
+
+    echo "$pid" > "$pidfile"
+    debug "${command} PID ${pid}"
+
+    return 0
+}
+
+run_rc_command "$1"
