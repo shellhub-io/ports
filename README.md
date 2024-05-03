@@ -22,6 +22,26 @@ Build and install ShellHub using the `make` command:
 make install clean
 ```
 
+Configure the required variables in `/etc/rc.conf` to start the agent:
+
+```conf
+# ShellHub Agent configuration.
+
+shellhub_enable="YES"
+shellhub_server_address="https://cloud.shellhub.io/"
+shellhub_tenant_id="00000000-0000-4000-0000-000000000000"
+```
+
+> [!NOTE]
+> The `shellhub_server_address` and `shellhub_tenant_id` are placeholder values and should be changed to your
+> desirable instance and the equivalent Tenant ID.
+
+Start the service:
+
+```sh
+service shellhub start
+```
+
 For further configuration and usage instructions, refer to the [documentation](https://docs.shellhub.io).
 
 ## Contribute
