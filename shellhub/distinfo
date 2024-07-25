@@ -1,3 +1,3 @@
-TIMESTAMP = 1714769649
-SHA256 (shellhub-agent0.15.1/shellhub-agent.tar.gz) = e9abd172559f045ea6adb0dd25fab53e7124d660050be1419f10b9e3bc74052c
-SIZE (shellhub-agent0.15.1/shellhub-agent.tar.gz) = 4200362
+TIMESTAMP = 1721931382
+SHA256 (shellhub-agent0.16.0/shellhub-agent.tar.gz) = 89cf3271ba9434981a953fbe5785c833d8e74e7f0a07a8d096eff79425671c64
+SIZE (shellhub-agent0.16.0/shellhub-agent.tar.gz) = 4466162
