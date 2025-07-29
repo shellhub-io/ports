@@ -1,6 +1,10 @@
 PORTNAME=	shellhub
 DISTVERSIONPREFIX=	v
+<<<<<<< Updated upstream
 DISTVERSION=	0.18.0
+=======
+DISTVERSION=	0.20.0
+>>>>>>> Stashed changes
 DISTVERSIONSUFFIX=
 CATEGORIES=	sysutils
 MASTER_SITES=	https://github.com/shellhub-io/shellhub/releases/download/${DISTVERSIONPREFIX}${DISTVERSION}${DISTVERSIONSUFFIX}/

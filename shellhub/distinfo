@@ -1,3 +1,9 @@
+<<<<<<< Updated upstream
 TIMESTAMP = 1739196996
 SHA256 (shellhub-agent0.18.0/shellhub-agent.tar.gz) = db72d9ef567359be721ab0ef99b70e3d7a679f0fd8a7919d0ba38bb6e5101b07
 SIZE (shellhub-agent0.18.0/shellhub-agent.tar.gz) = 4368117
+=======
+TIMESTAMP = 1753828179
+SHA256 (shellhub-agent0.20.0/shellhub-agent.tar.gz) = 1a47a6e358cbf22ff2595c2b91b1d28e624c24c7d751f62593502f0aabdaced4
+SIZE (shellhub-agent0.20.0/shellhub-agent.tar.gz) = 4392511
+>>>>>>> Stashed changes
