@@ -1,0 +1,57 @@
+name: Update distinfo
+
+on:
+  pull_request:
+    paths:
+      - 'shellhub/Makefile'
+
+jobs:
+  update-distinfo:
+    runs-on: ubuntu-latest
+    if: github.actor == 'renovate[bot]'
+
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update distinfo
+        run: |
+          # Read version from Makefile
+          VERSION=$(grep "^DISTVERSION=" shellhub/Makefile | cut -d= -f2 | tr -d '[:space:]')
+          PREFIX=$(grep "^DISTVERSIONPREFIX=" shellhub/Makefile | cut -d= -f2 | tr -d '[:space:]')
+          SUFFIX=$(grep "^DISTVERSIONSUFFIX=" shellhub/Makefile | cut -d= -f2 | tr -d '[:space:]')
+
+          # Construct download URL
+          URL="https://github.com/shellhub-io/shellhub/releases/download/${PREFIX}${VERSION}${SUFFIX}/shellhub-agent.tar.gz"
+
+          # Download the file
+          echo "Downloading ${URL}..."
+          curl -L -o /tmp/shellhub-agent.tar.gz "${URL}"
+
+          # Calculate SHA256 and SIZE
+          SHA256=$(sha256sum /tmp/shellhub-agent.tar.gz | awk '{print $1}')
+          SIZE=$(stat -c %s /tmp/shellhub-agent.tar.gz)
+          TIMESTAMP=$(date +%s)
+
+          # Generate distinfo
+          cat > shellhub/distinfo <<EOF
+          TIMESTAMP = ${TIMESTAMP}
+          SHA256 (shellhub-agent${VERSION}${SUFFIX}/shellhub-agent.tar.gz) = ${SHA256}
+          SIZE (shellhub-agent${VERSION}${SUFFIX}/shellhub-agent.tar.gz) = ${SIZE}
+          EOF
+
+          # Cleanup
+          rm /tmp/shellhub-agent.tar.gz
+
+          echo "distinfo updated successfully!"
+
+      - name: Commit distinfo changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add shellhub/distinfo
+          git diff --staged --quiet || git commit -m "Update distinfo for new version"
+          git push
